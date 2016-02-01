@@ -1,25 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JY7-99-ef3" userLabel="PushSetting">
+                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eza-SL-B6c">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="推送设置">
+                                            <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="notificationBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zni-ad-tcM"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已关闭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qc-XD-re6">
+                                        <rect key="frame" x="296" y="14" width="42" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-eC-cQW">
+                                        <rect key="frame" x="353" y="16" width="7" height="13"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Eza-SL-B6c" secondAttribute="bottom" id="7G0-NS-MdA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eza-SL-B6c" secondAttribute="trailing" id="QOw-gy-THo"/>
+                                    <constraint firstItem="LF2-eC-cQW" firstAttribute="leading" secondItem="1Qc-XD-re6" secondAttribute="trailing" constant="15" id="YAX-gb-p1w"/>
+                                    <constraint firstItem="1Qc-XD-re6" firstAttribute="centerY" secondItem="JY7-99-ef3" secondAttribute="centerY" id="hBd-qs-wmY"/>
+                                    <constraint firstItem="LF2-eC-cQW" firstAttribute="centerY" secondItem="JY7-99-ef3" secondAttribute="centerY" id="lRB-KR-ial"/>
+                                    <constraint firstItem="Eza-SL-B6c" firstAttribute="leading" secondItem="JY7-99-ef3" secondAttribute="leading" id="sTk-Ac-ebW"/>
+                                    <constraint firstItem="Eza-SL-B6c" firstAttribute="top" secondItem="JY7-99-ef3" secondAttribute="top" id="wdc-eJ-bBb"/>
+                                    <constraint firstAttribute="trailing" secondItem="LF2-eC-cQW" secondAttribute="trailing" constant="15" id="wgp-EE-qy0"/>
+                                    <constraint firstAttribute="height" constant="44" id="ymF-6g-Eg1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="JY7-99-ef3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="BYd-9r-uuQ"/>
+                            <constraint firstItem="JY7-99-ef3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jTq-rv-uhS"/>
+                            <constraint firstItem="JY7-99-ef3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zBy-kb-2OU"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="notiStateLbl" destination="1Qc-XD-re6" id="eAN-9b-FmM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow" width="7" height="13"/>
+    </resources>
 </document>

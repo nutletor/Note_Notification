@@ -8,7 +8,13 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+#import "AppDelegate.h"
+
+@interface ViewController ()<NotificationDelege>
+
+@property (weak, nonatomic) IBOutlet UILabel *notiStateLbl;
+
+- (IBAction)notificationBtnAction:(id)sender;
 
 @end
 
@@ -17,11 +23,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    AppDelegate * appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.notiDelegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)notificationBtnAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+
+#pragma mark - NotificationDelege
+- (void)resetNotificationState
+{
+    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    if (setting.types == UIUserNotificationTypeNone) {
+        self.notiStateLbl.text = @"已关闭";
+    } else {
+        self.notiStateLbl.text = @"已开启";
+    }
 }
 
 @end

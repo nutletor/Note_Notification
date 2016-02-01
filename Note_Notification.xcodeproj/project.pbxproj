@@ -207,6 +207,7 @@
 				TargetAttributes = {
 					281452931C5B5483008B2251 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = D4X9CN9GC7;
 					};
 					281452AC1C5B5483008B2251 = {
 						CreatedOnToolsVersion = 7.2;
@@ -411,6 +412,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Note_Notification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nutletor.com.Note-Notification";
@@ -422,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Note_Notification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nutletor.com.Note-Notification";
@@ -496,6 +499,7 @@
 				281452C31C5B5483008B2251 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		281452C41C5B5483008B2251 /* Build configuration list for PBXNativeTarget "Note_NotificationTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +508,7 @@
 				281452C61C5B5483008B2251 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		281452C71C5B5483008B2251 /* Build configuration list for PBXNativeTarget "Note_NotificationUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +517,7 @@
 				281452C91C5B5483008B2251 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
