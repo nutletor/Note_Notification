@@ -8,12 +8,13 @@
 
 #import "AppDelegate.h"
 
+#import "JPUSHService.h"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -23,9 +24,84 @@
     UIUserNotificationSettings * notificationSetting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSetting];
     
+    //JPush极光推送
+    //[[UIDevice currentDevice].systemVersion floatValue] >= 8.0
+    //可以添加自定义categories
+    [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+    
+    [JPUSHService setupWithOption:launchOptions appKey:@"416f81f42690d8fdbe176189" channel:@"iOS" apsForProduction:false];
+    [application setApplicationIconBadgeNumber:0];
+    [JPUSHService resetBadge];
+    
+    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
+    if (remoteNotification) {
+        NSString * infoType = [remoteNotification objectForKey:@"infoType"];
+        NSString * infoId = [remoteNotification objectForKey:@"infoId"];
+        if (infoType && infoId) {
+            NSInteger type = [infoType integerValue];
+//            switch (type) {
+//                case NotificationTypeProduct:
+//                {
+//                    FBGoodsViewController * goodsVC = [[FBGoodsViewController alloc] init];
+//                    goodsVC.goodsId = infoId;
+//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:goodsVC];
+//                    [naviC setNavigationBarHidden:YES];
+//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
+//                }
+//                    break;
+//                case NotificationTypeSpecial:
+//                {
+//                    FBSpecialViewController * specialVC = [[FBSpecialViewController alloc] init];
+//                    specialVC.categoryViewId = infoId;
+//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:specialVC];
+//                    [naviC setNavigationBarHidden:YES];
+//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
+//                }
+//                    break;
+//                case NotificationTypeTrial:
+//                {
+//                    FBTrialGoodsViewController * trialVC = [[FBTrialGoodsViewController alloc] init];
+//                    trialVC.tryGoodsId = infoId;
+//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:trialVC];
+//                    [naviC setNavigationBarHidden:YES];
+//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
+//                }
+//                    break;
+//                default:
+//                    break;
+//            }
+        }
+    }
+    
     return YES;
 }
 
+//推送部分
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//
+//    // Required
+//    [JPUSHService registerDeviceToken:deviceToken];
+//}
+//
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    // IOS 7 Support Required
+//    [JPUSHService handleRemoteNotification:userInfo];
+//    completionHandler(UIBackgroundFetchResultNewData);
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoMessageView" object:userInfo];
+//}
+//
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+//
+//    //Optional
+//    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+//}
+
+/*
 #pragma mark - Handling Local and Remote Notifications
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_AVAILABLE_IOS(3_0)
 {
@@ -80,13 +156,11 @@
     NSLog(@"%s %d", __FUNCTION__, __LINE__);
 }
 
-/*! This delegate method offers an opportunity for applications with the "remote-notification" background mode to fetch appropriate new data in response to an incoming remote notification. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
- 
- This method will be invoked even if the application was launched or resumed because of the remote notification. The respective delegate methods will be invoked first. Note that this behavior is in contrast to application:didReceiveRemoteNotification:, which is not called in those cases, and which will not be invoked if this method is implemented. !*/
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED
 {
     NSLog(@"%s %d", __FUNCTION__, __LINE__);
 }
+*/
 
 #pragma mark - Life cycle
 - (void)applicationWillResignActive:(UIApplication *)application {

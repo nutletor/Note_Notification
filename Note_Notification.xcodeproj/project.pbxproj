@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280741C71C772C5C00385A4B /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280741C51C772C5C00385A4B /* jpush-ios-2.1.0.a */; };
 		281452991C5B5483008B2251 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 281452981C5B5483008B2251 /* main.m */; };
 		2814529C1C5B5483008B2251 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2814529B1C5B5483008B2251 /* AppDelegate.m */; };
 		2814529F1C5B5483008B2251 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2814529E1C5B5483008B2251 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		280741C51C772C5C00385A4B /* jpush-ios-2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.0.a"; sourceTree = "<group>"; };
+		280741C61C772C5C00385A4B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		281452941C5B5483008B2251 /* Note_Notification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note_Notification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		281452981C5B5483008B2251 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2814529A1C5B5483008B2251 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				280741C71C772C5C00385A4B /* jpush-ios-2.1.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280741C41C772C5C00385A4B /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				280741C51C772C5C00385A4B /* jpush-ios-2.1.0.a */,
+				280741C61C772C5C00385A4B /* JPUSHService.h */,
+			);
+			path = JPush;
+			sourceTree = "<group>";
+		};
 		2814528B1C5B5483008B2251 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 				281452A01C5B5483008B2251 /* Main.storyboard */,
 				281452A31C5B5483008B2251 /* Assets.xcassets */,
 				281452A51C5B5483008B2251 /* LaunchScreen.storyboard */,
+				280741C41C772C5C00385A4B /* JPush */,
 				281452A81C5B5483008B2251 /* Info.plist */,
 				281452971C5B5483008B2251 /* Supporting Files */,
 			);
@@ -415,6 +429,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Note_Notification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Note_Notification/JPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nutletor.com.Note-Notification";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -427,6 +445,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Note_Notification/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Note_Notification/JPush",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "nutletor.com.Note-Notification";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
