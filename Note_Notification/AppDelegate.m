@@ -25,84 +25,54 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSetting];
     
     //JPush极光推送
-    //[[UIDevice currentDevice].systemVersion floatValue] >= 8.0
     //可以添加自定义categories
     [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
                                                       UIUserNotificationTypeSound |
                                                       UIUserNotificationTypeAlert)
                                           categories:nil];
     
-    [JPUSHService setupWithOption:launchOptions appKey:@"416f81f42690d8fdbe176189" channel:@"iOS" apsForProduction:false];
+    [JPUSHService setupWithOption:launchOptions appKey:@"xxxxxxxxxxxxx" channel:@"iOS" apsForProduction:false];
     [application setApplicationIconBadgeNumber:0];
     [JPUSHService resetBadge];
     
+    //这个判断是在程序没有运行的情况下收到通知，获取通知信息
     NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
-    if (remoteNotification) {
-        NSString * infoType = [remoteNotification objectForKey:@"infoType"];
-        NSString * infoId = [remoteNotification objectForKey:@"infoId"];
-        if (infoType && infoId) {
-            NSInteger type = [infoType integerValue];
-//            switch (type) {
-//                case NotificationTypeProduct:
-//                {
-//                    FBGoodsViewController * goodsVC = [[FBGoodsViewController alloc] init];
-//                    goodsVC.goodsId = infoId;
-//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:goodsVC];
-//                    [naviC setNavigationBarHidden:YES];
-//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
-//                }
-//                    break;
-//                case NotificationTypeSpecial:
-//                {
-//                    FBSpecialViewController * specialVC = [[FBSpecialViewController alloc] init];
-//                    specialVC.categoryViewId = infoId;
-//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:specialVC];
-//                    [naviC setNavigationBarHidden:YES];
-//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
-//                }
-//                    break;
-//                case NotificationTypeTrial:
-//                {
-//                    FBTrialGoodsViewController * trialVC = [[FBTrialGoodsViewController alloc] init];
-//                    trialVC.tryGoodsId = infoId;
-//                    UINavigationController * naviC = [[UINavigationController alloc]initWithRootViewController:trialVC];
-//                    [naviC setNavigationBarHidden:YES];
-//                    [self.window.rootViewController presentViewController:naviC animated:false completion:nil];
-//                }
-//                    break;
-//                default:
-//                    break;
-//            }
-        }
-    }
     
     return YES;
 }
 
-//推送部分
-//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//
-//    // Required
-//    [JPUSHService registerDeviceToken:deviceToken];
-//}
-//
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-//    // IOS 7 Support Required
-//    [JPUSHService handleRemoteNotification:userInfo];
-//    completionHandler(UIBackgroundFetchResultNewData);
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoMessageView" object:userInfo];
-//}
-//
-//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-//
-//    //Optional
-//    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
-//}
+#pragma mark - JPush相关方法
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required
+    [JPUSHService registerDeviceToken:deviceToken];
+}
 
-/*
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // IOS 7 Support Required
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoMessageView" object:userInfo];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+#pragma mark - Life cycle
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    //回到前台时刷新通知状态
+    if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
+        [_notiDelegate resetNotificationState];
+    }
+}
+
+
 #pragma mark - Handling Local and Remote Notifications
+/*
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken NS_AVAILABLE_IOS(3_0)
 {
     NSLog(@"%s %d", __FUNCTION__, __LINE__);
@@ -161,33 +131,5 @@
     NSLog(@"%s %d", __FUNCTION__, __LINE__);
 }
 */
-
-#pragma mark - Life cycle
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
-    //回到前台时刷新通知状态
-    if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
-        [_notiDelegate resetNotificationState];
-    }
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
 
 @end
