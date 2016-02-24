@@ -1,1 +1,2 @@
 # Note_Notification
+JPush极光推送iOS端环境配置Demo；添加从App跳转设置页面修改通知开关功能。
